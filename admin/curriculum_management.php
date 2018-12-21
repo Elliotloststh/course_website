@@ -18,6 +18,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>Curriculum Management</title>
 
     <!-- Bootstrap Core CSS -->
