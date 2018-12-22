@@ -356,7 +356,7 @@ session_start();
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <strong>学生列表</strong>
                     </div>
@@ -369,6 +369,8 @@ session_start();
                                     <th>序号</th>
                                     <th>学生姓名</th>
                                     <th>学号</th>
+                                    <th>邮箱</th>
+                                    <th>电话</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -389,6 +391,8 @@ session_start();
                                     echo '<td>'.$count.'</td>';
                                     echo '<td>'.$row['name'].'</td>';
                                     echo '<td>'.$row['stu_number'].'</td>';
+                                    echo '<td>'.$row['email'].'</td>';
+                                    echo '<td>'.$row['telephone'].'</td>';
                                     echo '</tr>';
                                 }
                                 mysqli_close($conn);
