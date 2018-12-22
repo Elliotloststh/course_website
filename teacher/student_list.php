@@ -388,7 +388,7 @@ session_start();
                                     $result = mysqli_query($conn, $query);
                                     $row = mysqli_fetch_assoc($result);
                                     echo '<tr>';
-                                    echo '<td>'.$count.'</td>';
+                                    echo '<td>'.$count++.'</td>';
                                     echo '<td>'.$row['name'].'</td>';
                                     echo '<td>'.$row['stu_number'].'</td>';
                                     echo '<td>'.$row['email'].'</td>';
