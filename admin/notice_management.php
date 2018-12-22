@@ -350,21 +350,29 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>下雪了，注意出行安全</td>
-                                        <td>2018.12.8</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>大雪预警，软工需求停课</td>
-                                        <td>2018.12.7</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
 
+
+                                    <?php include "../common/mysql_connect.php";
+
+                                    $sql = "select * from website_notice";
+                                    $result = mysqli_query($conn,$sql);
+                                    ?>
+                                    <?php
+                                    while($arr=@mysqli_fetch_row($result))
+                                    {
+                                        ?>
+                                        <tr>
+
+                                        <td><?php echo $arr[1]?></td>
+                                        <td><?php echo $arr[2]?></td>
+                                        <td>
+                                            <button class="btn btn-danger" type="button">删除</button>
+                                        </td>
+                                        </tr>
+
+                                        <?php
+                                    }
+                                    ?>
 
                                     </tbody>
                                 </table>
@@ -373,13 +381,17 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
     <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
-</div>
+
 <!-- /#wrapper -->
 
 <!-- jQuery -->
