@@ -283,7 +283,7 @@ if(isset($_POST['phone']) || isset($_POST['mail']) || isset($_POST['intro']))
                     <li><a href="ChangePassword_stu.php"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+                    <li><a href='../common/logout.php'><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -322,7 +322,7 @@ if(isset($_POST['phone']) || isset($_POST['mail']) || isset($_POST['intro']))
                                 <a href="KeJian_stu.php"> 课件</a>
                             </li>
                             <li>
-                                <a href="#"> 教学视频</a>
+                                <a href="video_stu.php"> 教学视频</a>
                             </li>
                         </ul>
                     </li>
