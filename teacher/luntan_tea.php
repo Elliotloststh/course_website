@@ -306,16 +306,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> 课程小组<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="group_list.php"> 小组列表</a>
-                            </li>
-                            <li>
-                                <a href="group_manage.php"> 管理小组</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="group_list.php"><i class="fa fa-users fa-fw"></i> 课程小组</a>
                     </li>
                     <li>
                         <a href="homework.php"><i class="fa fa-tablet fa-fw"></i> 作业管理</a>
