@@ -354,7 +354,7 @@ $result = mysqli_query($conn, $query);
                                 <ul class="dropdown-menu slidedown">
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-edit fa-fw"></i> 编辑
+                                            <i class="fa fa-times-circle fa-fw"></i> 编辑删除
                                         </a>
                                     </li>
                                 </ul>
@@ -378,7 +378,12 @@ $result = mysqli_query($conn, $query);
                                     echo '<div class="panel panel-info">';
                                         echo '<div class="panel-heading">';
                                             echo '<h4 class="panel-title">';
+                                            if($group_id < 10){
+                                                echo '<a data-toggle="collapse" data-parent="#accordion" href="#collapse'.$Collapse_Alphabet[$i].'">小组人员信息 G0'.$group_id.'</a>';
+                                            }
+                                            else {
                                                 echo '<a data-toggle="collapse" data-parent="#accordion" href="#collapse'.$Collapse_Alphabet[$i].'">小组人员信息 G'.$group_id.'</a>';
+                                            }
                                             echo '</h4>';
                                         echo '</div>';
 
@@ -417,6 +422,9 @@ $result = mysqli_query($conn, $query);
                                                         echo '</tbody>';
                                                     echo '</table>';
                                                 echo '</div>';
+                                                echo ' <a href="#">';
+                                                                echo '<i class="fa fa-plus fa-fw"></i> 添加小组成员 <i class="fa fa-user fa-fw"></i>';
+                                                        echo '</a>';
                                             echo '</div>';
                                         echo '</div>';
                                 echo '</div>';
@@ -425,6 +433,9 @@ $result = mysqli_query($conn, $query);
                                 <!-- /.panel-info -->
                             </div>
                                 <div class="panel-footer">     
+                                    <a href="#">
+                                            <i class="fa fa-plus fa-fw"></i> 添加小组 <i class="fa fa-users fa-fw"></i>
+                                    </a>
                             </div>
                         </div>
                         <!-- .panel-body -->
