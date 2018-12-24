@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 黄亦非
- * Date: 2018/12/8
- * Time: 0:52
- */
+require_once('../common/mysql_connect.php');
 ?>
 
 <!DOCTYPE html>
