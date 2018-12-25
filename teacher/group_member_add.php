@@ -1,22 +1,28 @@
 <?php
 require_once('../common/mysql_connect.php');
-echo '<script language="javascript">
-		<!--
-               	student_id = prompt("请输入组号");
-                if (student_id != null){
-                	alert("添加成功");
-                }
-                else{
-                	alert("取消操作");
-                }
-         //-->
-              </script>';
 
-$query = 'Insert into student_class_group VALUES(1,'.$student_id','.$_GET[group_id]')';
-mysqli_query($conn, $query);
-echo '<script>
-                alert("删除成功");
-                setTimeout("window.location.href=\'../teacher/group_manage.php\'", 0);
-              </script>';
-mysqli_close($conn);
+if($_POST) {
+  // $query = 'Insert into student_class_group VALUES('.$_SESSION['class_id'].','.$_POST['student_id'].','.$_SESSION['group_id'].')';
+  $query = 'Insert into student_class_group VALUES(1,'.$_POST["student_id"].','.$_GET['group_id'].')';
+  mysqli_query($conn, $query);
+
+  echo '<script>
+        alert("添加成功");
+        setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
+      </script>';
+  mysqli_close($conn);
+  return;
+}
 ?>
+
+<form id="form" action="" method="post">
+<input type="hidden" name="student_id" id="student_id" value="">
+</form>
+<script>
+  var str=window.prompt('请输入学生学号 :');
+  document.getElementById("student_id").value =str;
+  document.getElementById("form").submit();
+</script>
+
+?>
+

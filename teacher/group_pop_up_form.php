@@ -1,6 +1,6 @@
 <?php 
-require ("sidebar_tea.php");
- ?>
+require ("sidebar_tea.php"); 
+?>
     <!--    右侧工作区  -->
     <div id="page-wrapper">
         <div class="row">
@@ -8,13 +8,6 @@ require ("sidebar_tea.php");
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-users fa-fw"></i>小组信息 
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default btn-xs " >
-                                    <a href="group_manage.php">
-                                    编辑删除 <i class="fa fa-times-circle"></i>
-                                    </a>
-                                </button>
-                            </div>
                         </div>
                         <!-- .panel-heading -->
                         <div class="panel-body">
@@ -36,14 +29,28 @@ require ("sidebar_tea.php");
                                             echo '<h4 class="panel-title">';
                                             if($group_id < 10){
                                                 echo '<a data-toggle="collapse" data-parent="#accordion" href="#collapse'.$Collapse_Alphabet[$i].'">小组人员信息 G0'.$group_id.'</a>';
+                                                    echo'<div class="btn-group pull-right">';
+                                                        echo'<button type="button" class="btn btn-default btn-xs">';
+                                                            echo'<a href="group_delete.php?group_id='.$group_id.'">';
+                                                            echo'删除 <i class="fa fa-times-circle"></i>';
+                                                            echo '</a>';
+                                                       echo'</button>';
+                                                    echo'</div>';
                                             }
                                             else {
                                                 echo '<a data-toggle="collapse" data-parent="#accordion" href="#collapse'.$Collapse_Alphabet[$i].'">小组人员信息 G'.$group_id.'</a>';
+                                                    echo'<div class="btn-group pull-right">';
+                                                        echo'<button type="button" class="btn btn-default btn-xs">';
+                                                            echo'<a href="group_delete.php?group_id='.$group_id.'">';
+                                                            echo'删除 <i class="fa fa-times-circle"></i>';
+                                                            echo '</a>';
+                                                       echo'</button>';
+                                                    echo'</div>';
                                             }
                                             echo '</h4>';
                                         echo '</div>';
 
-                                         echo '<div id="collapse'.$Collapse_Alphabet[$i].'" class="panel-collapse collapse">';
+                                         echo '<div id="collapse'.$Collapse_Alphabet[$i].'" class="panel-collapse collapse in">';
                                             echo '<div class="panel-body"> ';
                                                 echo '<div class="table-responsive">';
                                                     echo '<table class="table table-striped table-hover">';
@@ -52,6 +59,7 @@ require ("sidebar_tea.php");
                                                             echo '<th>#</th>';
                                                             echo '<th>姓名</th>';
                                                             echo '<th>学号</th>';
+                                                            echo '<th>操作</th>';
                                                         echo '</tr>';
                                                         echo '</thead>';
                                                         echo '<tbody>';
@@ -73,28 +81,19 @@ require ("sidebar_tea.php");
                                                             echo '<td>'.$no.'</td>';
                                                             echo '<td>'.$name.'</td>';
                                                             echo '<td>'.$stu_number.'</td>';
+                                                            echo '<td><a href="group_member_delete.php?student_id='.$student_id.'">删除 </td></a>';
                                                         echo '</tr>';
                                         }
                                                         echo '</tbody>';
                                                     echo '</table>';
                                                 echo '</div>';
-                                                // echo ' <a href="javascript:popup_group_mem();">';
-                                                 echo ' <a href="group_member_add.php?group_id='.$group_id.'">';
-                                                                echo '<i class="fa fa-plus fa-fw"></i> 添加小组成员 <i class="fa fa-user fa-fw"></i>';
-                                                        echo '</a>';
                                             echo '</div>';
                                         echo '</div>';
                                 echo '</div>';
                                 }
                                 mysqli_close($conn);
                                 ?>
-
                                 <!-- /.panel-info -->
-                            </div>
-                                <div class="panel-footer">     
-                                    <a href="group_add.php">
-                                            <i class="fa fa-plus fa-fw"></i> 添加小组 <i class="fa fa-users fa-fw"></i>
-                                    </a>
                             </div>
                         </div>
                         <!-- .panel-body -->
