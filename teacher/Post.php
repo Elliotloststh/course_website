@@ -29,7 +29,7 @@ $times += $row[5];
 $query = 'update post set times = ' . $times . ' where post_id = ' . $post_id . ';';
 mysqli_query($conn,$query);
 
-require ("sidebar_stu.php");
+require ("sidebar_tea.php");
 ?>
 
     <!--    右侧工作区  -->
