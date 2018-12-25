@@ -1,6 +1,6 @@
 <?php
-require ("sidebar_stu.php");
 session_start();
+require ("sidebar_stu.php");
 ?>
     <!--    右侧工作区  -->
     <div id="page-wrapper">
