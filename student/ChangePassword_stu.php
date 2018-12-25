@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("sidebar_stu.php");
 ?>
 
@@ -66,10 +67,11 @@ else
     else if($new_pass != $another) echo '<script language="JavaScript">alert("两次输入密码不相同，请重新输入")</script>';
     else
     {
-        $sql = 'update people set pswd = "'.md5($new_pass).'" where people_id = 1';
+        $sql = 'update people set pswd = "'.md5($new_pass).'" where people_id = '.$_SESSION['people_id'];
         mysqli_query($conn, $sql);
         echo '<script language="JavaScript">alert("修改密码成功")</script>';
     }
+    mysqli_close($conn);
 }
 ?>
 </body>

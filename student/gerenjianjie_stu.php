@@ -6,8 +6,9 @@
  * Time: 0:04
  */
 
+session_start();
 require_once('../common/mysql_connect.php');
-$query = 'select name, stu_number, telephone, email, introduction from people WHERE people_id = 1';
+$query = 'select name, stu_number, telephone, email, introduction from people WHERE people_id = '.$_SESSION['people_id'];
 $result = mysqli_query($conn, $query);
 while($row = mysqli_fetch_assoc($result))
 {
@@ -23,7 +24,7 @@ if(isset($_POST['phone']) || isset($_POST['mail']) || isset($_POST['intro']))
     $phone = ($_POST['phone'] == '') ? $phone : $_POST['phone'];
     @$mail = ($_POST['mail'] == '') ? $mail : $_POST['mail'];
     $intro = ($_POST['intro'] == '') ? $intro : $_POST['intro'];
-    $sql = 'update people set telephone = "'.$phone.'", email = "'.$mail.'", introduction = "'.$intro.'" where people_id = 1';
+    $sql = 'update people set telephone = "'.$phone.'", email = "'.$mail.'", introduction = "'.$intro.'" where people_id = '.$_SESSION['people_id'];
     mysqli_query($conn, $sql);
     echo '<script>alert("修改个人信息成功")</script>';
 }
@@ -116,7 +117,7 @@ require ("sidebar_stu.php");
                                 <tbody>
                                 <?php
                                 require_once('../common/mysql_connect.php');
-                                $query = 'select * from people_type_class WHERE people_id = 1';
+                                $query = 'select * from people_type_class WHERE people_id = '.$_SESSION['people_id'];
                                 $result = mysqli_query($conn, $query);
 
                                 $class_id_array = array();
@@ -129,10 +130,11 @@ require ("sidebar_stu.php");
                                     $course_name = mysqli_fetch_assoc($result)['course_name'];
                                     echo '<tr>';
                                     echo '<td>'.$course_name.'</td>';
-                                    echo '<td>黄亦非</td>';
-                                    echo '<td>3160104367</td>';
+                                    echo '<td>'.$_SESSION['name'].'</td>';
+                                    echo '<td>'.$_SESSION['stu_num'].'</td>';
                                     echo '</tr>';
                                 }
+                                mysqli_close($conn);
                                 ?>
                                 </tbody>
                             </table>
