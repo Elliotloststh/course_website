@@ -7,7 +7,7 @@
  */
 session_start();
 require_once('../common/mysql_connect.php');
-require ("sidebar_stu.php");
+require ("sidebar_tea.php");
 ?>
 
     <!--    右侧工作区  -->
