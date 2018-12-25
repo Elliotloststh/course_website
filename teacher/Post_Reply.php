@@ -19,7 +19,7 @@ $post_id = $_SESSION['post_id'];
 $class_id = $_SESSION['class_id'];
 $people_id = $_SESSION['people_id'];
 
-require ("sidebar_stu.php");
+require ("sidebar_tea.php");
 ?>
 
     <!--    右侧工作区  -->
