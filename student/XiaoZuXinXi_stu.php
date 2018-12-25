@@ -355,7 +355,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-8" style="left: 160px">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3>我的小组：G03</h3>
                     </div>
