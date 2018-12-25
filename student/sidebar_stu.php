@@ -322,16 +322,16 @@
                         <a href="#"><i class="fa fa-sitemap fa-fw"></i> 友情链接<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="http://jwbinfosys.zju.edu.cn/">浙江大学教务网</a>
+                                <a href="http://jwbinfosys.zju.edu.cn/" target="_blank">浙江大学教务网</a>
                             </li>
                             <li>
-                                <a href="https://www.cc98.org/">CC98</a>
+                                <a href="https://www.cc98.org/" target="_blank">CC98</a>
                             </li>
                             <li>
-                                <a href="http://cspo.zju.edu.cn/">浙大计算机学院</a>
+                                <a href="http://cspo.zju.edu.cn/" target="_blank">浙大计算机学院</a>
                             </li>
                             <li>
-                                <a href="https://github.com/">Github</a>
+                                <a href="https://github.com/" target="_blank">Github</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

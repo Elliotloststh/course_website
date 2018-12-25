@@ -1,5 +1,4 @@
 <?php
-require ("sidebar_stu.php");
 require_once('../common/mysql_connect.php');
 // $query = 'select distinct group_id FROM student_class_group WHERE class_id ='.$_SESSION['class_id'].'AND student_id ='.$_SESSION['student_id']'';
 $query = 'select distinct group_id FROM student_class_group WHERE class_id = 1 AND student_id = 1';
@@ -7,6 +6,7 @@ $result = mysqli_query($conn, $query);
 $group_id_array = array();
 while($row = mysqli_fetch_assoc($result)) array_push($group_id_array, $row['group_id']);
 $group_id = $group_id_array[0];
+require ("sidebar_stu.php");
 ?>
     <!--    右侧工作区  -->
     <div id="page-wrapper">
@@ -55,6 +55,7 @@ $group_id = $group_id_array[0];
                                         echo '<td>'.$stu_number.'</td>';
                                         echo '</tr>';
                                      }
+                                     mysqli_close($conn);
                                      ?>
                                 </tbody>
                             </table>
