@@ -1,13 +1,38 @@
 <?php
+session_start();
+require_once('../common/mysql_connect.php');
+if(isset($_GET['course_id']) && isset($_GET['class_id']))
+{
+    $course_id = $_GET['course_id'];
+    $class_id = $_GET['class_id'];
+    $_SESSION['course_id'] = $course_id;
+    $_SESSION['class_id'] = $class_id;
+}
+else
+{
+    $course_id = $_SESSION['course_id'];
+    $class_id = $_SESSION['class_id'];
+}
+
+if(isset($_POST['content']))
+{
+
+}
 require ("sidebar_tea.php");
 ?>
     <!--    右侧工作区  -->
     <div id="page-wrapper">
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <p>作业信息</p>
+                        <p>
+                            作业信息
+                            <a href="homework_assignment.php">
+                                <button class="btn btn-success" type="submit" style="Float:right;">布置作业</button>
+                            </a>
+                        </p>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -16,25 +41,57 @@ require ("sidebar_tea.php");
                                 <thead>
                                 <tr>
                                     <th>作业描述</th>
+                                    <th>状态</th>
                                     <th>提交人数</th>
                                     <th>截止日期</th>
                                     <th>操作</th>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>作业1：UML时序图</td>
-                                    <td>50/67</td>
-                                    <td>2018-12-18</td>
-                                    <td><a href="homework_correct.php?homework_id=1" target="_blank">进入批改</a></td>
-                                </tr>
-                                <tr>
-                                    <td>作业2：类图绘制</td>
-                                    <td>50/67</td>
-                                    <td>2018-12-30</td>
-                                    <td><a href="homework_correct.php?homework_id=2" target="_blank">进入批改</a> </td>
-                                </tr>
-                                </tbody>
+                                <?php
+                                require_once('../common/mysql_connect.php');
+                                $query = 'select * from people_type_class WHERE class_id = '.$class_id.' and type = "S"';
+                                $result = mysqli_query($conn, $query);
+                                $total_num = mysqli_num_rows($result);
+                                $query = 'select * from tea_hw WHERE class_id = '.$class_id;
+                                $result = mysqli_query($conn, $query);
+                                $count = 1;
+                                while($row = mysqli_fetch_assoc($result))
+                                {
+                                    $homework_id = $row['homework_id'];
+                                    $title = $row['title'];
+                                    $deadline = $row['deadline'];
+                                    $state0 = $row['state'];
+                                    switch ($state0) {
+                                        case 0:
+                                            $state = "未发布";
+                                            $color = "#FF512C";
+                                            $op = "编辑";
+                                            $href = "homework_assignment.php?homework_id=";break;
+                                        case 1:
+                                            $state = "已发布";
+                                            $color = "black";
+                                            $op = "进入批改";
+                                            $href = "homework_correct.php?homework_id=";break;
+                                        case 2:
+                                            $state = "已批改";
+                                            $color = "#2FB836";
+                                            $op = "进入批改";
+                                            $href = "homework_correct.php?homework_id=";break;
+                                    }
+
+                                    $query = 'select * from stu_hw WHERE homework_id = '.$homework_id;
+                                    $result0 = mysqli_query($conn, $query);
+                                    $commit_num = mysqli_num_rows($result0);
+                                    echo '<tr>';
+                                    $print = '<td>'.$title.'</td>'; echo $print;
+                                    $print = '<td style="Color:'.$color.'">'.$state.'</td>'; echo '<div style="Color:'.$color.'">'.$print.'</div style="Color:'.$color.'">';
+                                    $print = '<td>'.$commit_num.'/'.$total_num.'</td>'; echo $print;
+                                    $print = '<td>'.$deadline.'</td>'; echo $print;
+                                    $print = '<td><a href="'.$href.''.$homework_id.'">'.$op.'</a></td>'; echo $print;
+                                    echo '</tr>';
+                                    $count++;
+                                }
+                                mysqli_close($conn);
+                                ?>
                             </table>
                         </div>
                     </div>
