@@ -1,5 +1,5 @@
 <?php
-require_once('mysql_connect.php');
+require_once('../common/mysql_connect.php');
 echo '<script language="javascript">
 		<!--
                	student_id = prompt("请输入组号");

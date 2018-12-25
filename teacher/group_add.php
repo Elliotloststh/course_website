@@ -1,5 +1,5 @@
 <?php
-require_once('mysql_connect.php');
+require_once('../common/mysql_connect.php');
 if(empty($_POST['group_id']))
 {
     echo '<script>

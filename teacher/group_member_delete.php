@@ -1,6 +1,6 @@
 <?php
-require_once('mysql_connect.php');
-$query = 'delete from student_class_group WHERE class_id = 1 AND group_id = '.$_GET['group_id'];
+require_once('../common/mysql_connect.php');
+$query = 'delete from student_class_group WHERE class_id = 1 AND student_id = '.$_GET['student_id'];
 mysqli_query($conn, $query);
 echo '<script>
                 alert("删除成功");
