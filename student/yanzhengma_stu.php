@@ -5,7 +5,7 @@
  * Date: 2018/12/17
  * Time: 10:23
  */
-
+session_start();
 $name = $_POST['name'];
 $code = $_POST['recode'];
 
@@ -24,7 +24,7 @@ if(mysqli_num_rows($result) == 0)
 }
 
 $class_id = mysqli_fetch_assoc($result)['class_id'];
-$people_id = 1;
+$people_id = $_SESSION['people_id'];
 
 //检验是否已经注册过该课程
 $query = 'select * from people_type_class WHERE class_id = '.$class_id.' and people_id = '.$people_id;
@@ -40,9 +40,11 @@ if(mysqli_num_rows($result) != 0)
 
 
 $query = 'insert into people_type_class VALUES ('.$people_id.', "S", '.$class_id.')';
-mysqli_query($conn, $query);
+@mysqli_query($conn, $query);
 
 echo "<script type=\"text/javascript\">
             alert(\"绑定课程成功！\");
             setTimeout(\"window.location.href='gerenjianjie_stu.php'\",100);
           </script>";
+
+mysqli_close($conn);
