@@ -1,13 +1,25 @@
 <?php
 require ("sidebar_stu.php");
+require_once('../common/mysql_connect.php');
+// $query = 'select distinct group_id FROM student_class_group WHERE class_id ='.$_SESSION['class_id'].'AND student_id ='.$_SESSION['student_id']'';
+$query = 'select distinct group_id FROM student_class_group WHERE class_id = 1 AND student_id = 1';
+$result = mysqli_query($conn, $query);
+$group_id_array = array();
+while($row = mysqli_fetch_assoc($result)) array_push($group_id_array, $row['group_id']);
+$group_id = $group_id_array[0];
 ?>
     <!--    右侧工作区  -->
     <div id="page-wrapper">
         <div class="row">
-            <div class="col-lg-8" style="left: 160px">
+            <div class="col-lg-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3>我的小组：G03</h3>
+                        <?php 
+                        if($group_id<10){
+                            echo '<h3>我的小组：G0'.$group_id.'</h3>';
+                        }
+                        else echo '<h3>我的小组：G'.$group_id.'</h3>';
+                         ?>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -17,47 +29,33 @@ require ("sidebar_stu.php");
                                 <tr>
                                     <th>#</th>
                                     <th>姓名</th>
-                                    <th>班级</th>
-                                    <th>身份</th>
+                                    <th>学号</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="success">
-                                    <td>1</td>
-                                    <td>黄亦非</td>
-                                    <td>软工1601</td>
-                                    <td>队长</td>
-                                </tr>
-                                <tr class="info">
-                                    <td>2</td>
-                                    <td>袁佳浩</td>
-                                    <td>软工1601</td>
-                                    <td>队员</td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>3</td>
-                                    <td>叶天琛</td>
-                                    <td>软工1602</td>
-                                    <td>队员</td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>4</td>
-                                    <td>唐睿源</td>
-                                    <td>软工1602</td>
-                                    <td>队员</td>
-                                </tr>
-                                <tr class="success">
-                                    <td>5</td>
-                                    <td>曾微媜</td>
-                                    <td>软工1501</td>
-                                    <td>队员</td>
-                                </tr>
-                                <tr class="info">
-                                    <td>6</td>
-                                    <td>陈剑辉</td>
-                                    <td>信工1503</td>
-                                    <td>队员</td>
-                                </tr>
+                                    <?php 
+                                    $Color=array("success","warning","info","danger");
+                                   $query = 'select student_id from student_class_group WHERE class_id = 1 AND group_id = '.$group_id;
+                                    $result = mysqli_query($conn, $query);
+                                    $student_id_array = array();
+                                    while ($row = mysqli_fetch_assoc($result)) array_push($student_id_array, $row['student_id']);
+
+                                     for ($i = 0; $i < count($student_id_array); $i++){
+                                        $no = $i + 1;
+                                        $student_id = $student_id_array[$i];
+                                        $query = "select stu_number from people WHERE people.people_id = $student_id ";
+                                        $result = mysqli_query($conn, $query);
+                                        $stu_number = mysqli_fetch_assoc($result)['stu_number'];
+                                        $query = 'select name from people WHERE people.people_id = '.$student_id ;
+                                        $result = mysqli_query($conn, $query);
+                                        $name = mysqli_fetch_assoc($result)['name'];
+                                        echo '<tr class = '.$Color[$i%4].'>';
+                                        echo '<td>'.$no.'</td>';
+                                        echo '<td>'.$name.'</td>';
+                                        echo '<td>'.$stu_number.'</td>';
+                                        echo '</tr>';
+                                     }
+                                     ?>
                                 </tbody>
                             </table>
                         </div>
