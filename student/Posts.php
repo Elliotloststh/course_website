@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: 黄亦非
- * Date: 2018/12/8
- * Time: 18:44
+ * User: Lucifer
+ * Date: 2018/12/22
+ * Time: 12:21
  */
 
 session_start();
@@ -356,43 +356,13 @@ session_start();
     <!--    右侧工作区  -->
     <div id="page-wrapper">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3><strong>热门话题</strong></h3>
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <?php
-                        require_once('../common/mysql_connect.php');
-                        $class = $_SESSION['class_id'];
-                        $query = 'select * from post where class_id = '. $class . ' and post_level = 1 order by times desc;';
-                        $result = mysqli_query($conn,$query);
-                        $array = array();
-
-                        while($row = mysqli_fetch_assoc($result))array_push($array,$row);
-                        $num = count($array);
-
-                        for($i = 0;$i < ($num <= 5 ? $num : 5);$i ++)
-                        {
-                            echo '<div class="alert alert-info">';
-                            echo '<a href="Post.php?post_id=' . $array[$i]['post_id'] . '" class="alert-link">' . '【' . $array[$i]['times'] . '】' . $array[$i]['content']  .  '</a>';
-                            echo '</div>';
-                        }
-                        ?>
-                        <div class="alert alert-info">
-                            <a href="Posts.php" class="alert-link">--MORE--</a>
-                        </div>
-                    </div>
-                    <!-- .panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
             <!-- /.col-lg-6 -->
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3><strong>课程论坛</strong></h3>
+                        <h3>
+                            <strong>课程论坛</strong>
+                        </h3>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -406,16 +376,21 @@ session_start();
                         while($row = mysqli_fetch_assoc($result))array_push($array,$row);
                         $num = count($array);
 
-                        for($i = 0;$i < ($num <= 5 ? $num : 5);$i ++)
+                        for($i = 0;$i < $num;$i ++)
                         {
                             echo '<div class="alert alert-info">';
                             echo '<a href="Post.php?post_id=' . $array[$i]['post_id'] . '" class="alert-link">' . ($array[$i])['content'] . '</a>';
                             echo '</div>';
                         }
+
+                        echo '<div class="row show-grid">';
+                        echo '<div class="col-md-12">';
+                        echo '<form role="form" action="Post_New.php" method="get" >';
+                        echo '<textarea name="send_message" class="form-control" rows="3" placeholder="发表新帖"></textarea>';
+                        echo '<button type="submit" class="btn btn-default">发射</button>';
+                        echo '</div></form></div>';
+
                         ?>
-                        <div class="alert alert-info">
-                            <a href="Posts.php" class="alert-link">--MORE--</a>
-                        </div>
                     </div>
                     <!-- .panel-body -->
                 </div>
