@@ -36,6 +36,7 @@ while($row = mysqli_fetch_assoc($result))
     $real_password = $row['pswd'];
     $people_id = $row['people_id'];
     $name = $row['name'];
+    $stu_num = $row['stu_number'];
 }
 
 if(md5($password) != $real_password)
@@ -51,6 +52,7 @@ session_start();
 $_SESSION['user_type'] = "user";
 $_SESSION['people_id'] = $people_id;
 $_SESSION['name'] = $name;
+$_SESSION['stu_num'] = $stu_num;
 
 mysqli_close($conn);
 header("Location: ./common/home.php");
