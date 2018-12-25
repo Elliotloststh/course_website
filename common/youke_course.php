@@ -5,6 +5,7 @@
  * Date: 2018/12/15
  * Time: 21:43
  */
+session_start();
 require("sidebar_home.php");
 ?>
     <!--    右侧工作区  -->
