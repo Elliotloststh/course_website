@@ -1,5 +1,5 @@
 <?php
-session_destroy();
+// session_destroy();
 
 if(isset($_GET['type']))
 {

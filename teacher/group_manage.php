@@ -1,14 +1,7 @@
 <?php 
 session_start();
-if(isset($_GET['course_id']) && isset($_GET['class_id']))
-{
-    $class_id = $_GET['class_id'];
-    $_SESSION['class_id'] = $class_id;
-}
-else
-{
-    $class_id = $_SESSION['class_id'];
-}
+$course_id = $_SESSION['course_id'];
+$class_id = $_SESSION['class_id'];
 require ("sidebar_tea.php"); 
 ?>
     <!--    右侧工作区  -->
