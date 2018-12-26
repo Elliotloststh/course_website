@@ -272,9 +272,15 @@
                     <li>
                         <a href="message_board.php"><i class="fa fa-deafness fa-fw"></i> 留言板</a>
                     </li>
-                    <li>
-                        <a href="stu_add_class.php"><i class="fa fa-amazon fa-fw"></i> 注册课程</a>
-                    </li>
+                    <?php
+                    if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] != "youke") {
+                        echo "
+                        <li>
+                            <a href=\"stu_add_class.php\"><i class=\"fa fa-amazon fa-fw\"></i> 注册课程</a>
+                        </li>
+                        ";
+                    }
+                    ?>
                     <li>
                         <a href="#"><i class="fa fa-sitemap fa-fw"></i> 友情链接<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">

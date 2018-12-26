@@ -306,7 +306,7 @@
                         <a href="student_list.php"><i class="fa fa-edge fa-fw"></i> 学生列表</a>
                     </li>
                     <li>
-                        <a href="luntan_tea.php"><i class="fa fa-ellipsis-h fa-fw"></i> 课程论坛</a>
+                        <a href="Luntan.php"><i class="fa fa-ellipsis-h fa-fw"></i> 课程论坛</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-sitemap fa-fw"></i> 友情链接<span class="fa arrow"></span></a>

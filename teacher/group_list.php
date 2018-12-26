@@ -26,6 +26,7 @@ require ("sidebar_tea.php");
                                     $result = mysqli_query($conn, $query);
                                     $group_id_array = array();
                                     while($row = mysqli_fetch_assoc($result)) array_push($group_id_array, $row['group_id']);
+                                    sort($group_id_array);
                                     $Collapse_Alphabet = array("One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen","Twenty");
                                     // Collapse_Alphabet is used for the collapsible effect 
                                     for ($i = 0; $i < count($group_id_array); $i++)
@@ -58,6 +59,7 @@ require ("sidebar_tea.php");
                                         $query = 'select student_id from student_class_group WHERE class_id = 1 AND group_id = '.$group_id;
                                         $result = mysqli_query($conn, $query);
                                         $student_id_array = array();
+                                        sort($student_id_array);
                                         while ($row = mysqli_fetch_assoc($result)) array_push($student_id_array, $row['student_id']);
                                         for($j=0; $j < count($student_id_array) ; $j++ )
                                         {
@@ -78,7 +80,8 @@ require ("sidebar_tea.php");
                                                         echo '</tbody>';
                                                     echo '</table>';
                                                 echo '</div>';
-                                                echo ' <a href="#">';
+                                                // echo ' <a href="javascript:popup_group_mem();">';
+                                                 echo ' <a href="group_member_add.php?group_id='.$group_id.'">';
                                                                 echo '<i class="fa fa-plus fa-fw"></i> 添加小组成员 <i class="fa fa-user fa-fw"></i>';
                                                         echo '</a>';
                                             echo '</div>';
@@ -87,10 +90,11 @@ require ("sidebar_tea.php");
                                 }
                                 mysqli_close($conn);
                                 ?>
+
                                 <!-- /.panel-info -->
                             </div>
                                 <div class="panel-footer">     
-                                    <a href="#">
+                                    <a href="group_add.php">
                                             <i class="fa fa-plus fa-fw"></i> 添加小组 <i class="fa fa-users fa-fw"></i>
                                     </a>
                             </div>
