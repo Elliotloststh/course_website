@@ -17,6 +17,11 @@ switch ($type){
     case "message":
         $table = "message_board";
         $primaryKey = "message_id";
+        break;
+    case "link":
+        $table = "link";
+        $primaryKey = "id";
+        break;
 
 }
 

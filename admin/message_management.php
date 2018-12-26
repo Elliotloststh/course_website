@@ -353,7 +353,7 @@
                                     <tbody>
                                     <?php include "../common/mysql_connect.php";
 
-                                    $sql = "select * from message_board";
+                                    $sql = "select * from link";
                                     $result = mysqli_query($conn, $sql);
                                     while ($arr = @mysqli_fetch_row($result)) {
 

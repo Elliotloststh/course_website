@@ -60,6 +60,11 @@ function show_modal(arg) {
         case "message":
             modal_content ="内容：<input type='text' id ='content'><br>发言人：<input type='text' id ='name'><br>";
             $("#add_message").html(modal_content);
+            break;
+        case "link":
+            modal_content ="内容：<input type='text' id ='content'><br>";
+            $("#add").html(modal_content);
+            break;
     }
 
 }
@@ -79,6 +84,12 @@ function pack_add(arg) {
                 type:"message",
                 content:$("#content").val(),
                 name:$("#name").val()
+            };
+            break;
+        case "link":
+            info={
+                type:"link",
+                content:$("#content").val()
             };
             break;
     }
