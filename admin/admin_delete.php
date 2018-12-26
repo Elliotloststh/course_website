@@ -30,6 +30,10 @@ switch ($type){
         $table = "course";
         $primaryKey = "course_id";
         break;
+    case "account":
+        $table = "people";
+        $primaryKey = "people_id";
+        break;
 }
 
 //$sql = "delete from website_notice where notice_id='{$id}'";
