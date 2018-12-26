@@ -349,7 +349,7 @@
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="changing">
                                     <?php include "../common/mysql_connect.php";
 
                                     $sql = "select * from link";
