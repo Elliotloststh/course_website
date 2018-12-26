@@ -26,7 +26,10 @@ switch ($type){
         $table = "post";
         $primaryKey ="id";
         break;
-
+    case "curriculum":
+        $table = "course";
+        $primaryKey = "course_id";
+        break;
 }
 
 //$sql = "delete from website_notice where notice_id='{$id}'";

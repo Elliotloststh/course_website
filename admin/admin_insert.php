@@ -25,6 +25,12 @@ switch ($type){
         $content = $_POST["content"];
         $sql = "insert into link(content,pub_date) VALUES ('$content','$current_date')";
         break;
+    case "curriculum":
+        $table = "course";
+        $name = $_POST["name"];
+        $intro = $_POST["intro"];
+        $sql = "insert into course(course_name,introduction) VALUES ('$name','$intro')";
+        break;
 
 }
 

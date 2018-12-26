@@ -65,6 +65,10 @@ function show_modal(arg) {
             modal_content ="内容：<input type='text' id ='content'><br>";
             $("#add").html(modal_content);
             break;
+        case "curriculum":
+            modal_content ="课程名：<input type='text' id ='name'><br>课程介绍：<input type='text' id ='intro'><br>";
+            $("#add").html(modal_content);
+            break;
     }
 
 }
@@ -90,6 +94,13 @@ function pack_add(arg) {
             info={
                 type:"link",
                 content:$("#content").val()
+            };
+            break;
+        case "curriculum":
+            info={
+                type:"curriculum",
+                name:$("#name").val(),
+                intro:$("#intro").val()
             };
             break;
     }
