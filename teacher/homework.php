@@ -20,6 +20,14 @@ if(isset($_POST['content']))
 }
 require ("sidebar_tea.php");
 ?>
+    <script type="text/javascript">
+        function del_confirm(id) {
+            if(confirm('确认删除改作业吗？'))
+            {
+                document.getElementById("ahref"+id).href = "post_hw_del.php?homework_id="+id;
+            }
+        }
+    </script>
     <!--    右侧工作区  -->
     <div id="page-wrapper">
 
@@ -45,6 +53,7 @@ require ("sidebar_tea.php");
                                     <th>提交人数</th>
                                     <th>截止日期</th>
                                     <th>操作</th>
+                                    <th></th>
                                 </tr>
                                 <?php
                                 require_once('../common/mysql_connect.php');
@@ -87,6 +96,7 @@ require ("sidebar_tea.php");
                                     $print = '<td>'.$commit_num.'/'.$total_num.'</td>'; echo $print;
                                     $print = '<td>'.$deadline.'</td>'; echo $print;
                                     $print = '<td><a href="'.$href.''.$homework_id.'">'.$op.'</a></td>'; echo $print;
+                                    $print = '<td><a id="ahref'.$homework_id.'" href="javascript:;" onclick="del_confirm('.$homework_id.')">删除</a></td>'; echo $print;
                                     echo '</tr>';
                                     $count++;
                                 }
