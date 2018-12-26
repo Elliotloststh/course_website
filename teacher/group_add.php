@@ -1,5 +1,14 @@
 <?php
 require_once('../common/mysql_connect.php');
+if(isset($_GET['course_id']) && isset($_GET['class_id']))
+{
+    $class_id = $_GET['class_id'];
+    $_SESSION['class_id'] = $class_id;
+}
+else
+{
+    $class_id = $_SESSION['class_id'];
+}
 
 if($_POST) {
   // $query = 'Insert into student_class_group VALUES('.$_SESSION['class_id'].',,'.$_POST['group_id'].')';
@@ -12,7 +21,7 @@ if($_POST) {
 	    return;
 	}
 
-  $query = 'select * from student_class_group WHERE class_id = 1 AND group_id = '.$_POST['group_id'];
+  $query = 'select * from student_class_group WHERE class_id = '.$class_id.' AND group_id = '.$_POST['group_id'];
   $result = mysqli_query($conn, $query);
   if(@mysqli_num_rows($result) == 1){
       echo '<script>
@@ -22,7 +31,7 @@ if($_POST) {
       return;
   }
 
-  $query = 'select * from student_class_group WHERE class_id = 1 AND student_id = '.$_POST['student_id'];
+  $query = 'select * from student_class_group WHERE class_id = '.$class_id.' AND student_id = '.$_POST['student_id'];
   $result = mysqli_query($conn, $query);
   if(@mysqli_num_rows($result) == 1){
       echo '<script>

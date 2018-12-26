@@ -1,4 +1,14 @@
 <?php 
+session_start();
+if(isset($_GET['course_id']) && isset($_GET['class_id']))
+{
+    $class_id = $_GET['class_id'];
+    $_SESSION['class_id'] = $class_id;
+}
+else
+{
+    $class_id = $_SESSION['class_id'];
+}
 require ("sidebar_tea.php"); 
 ?>
     <!--    右侧工作区  -->
@@ -15,7 +25,7 @@ require ("sidebar_tea.php");
                                  <!-- .panel-info -->
                                  <?php 
                                     require_once('../common/mysql_connect.php');
-                                    $query = 'select distinct group_id FROM student_class_group WHERE class_id = 1';
+                                    $query = 'select distinct group_id FROM student_class_group WHERE class_id = '.$class_id;
                                     $result = mysqli_query($conn, $query);
                                     $group_id_array = array();
                                     while($row = mysqli_fetch_assoc($result)) array_push($group_id_array, $row['group_id']);
@@ -64,7 +74,7 @@ require ("sidebar_tea.php");
                                                         echo '</tr>';
                                                         echo '</thead>';
                                                         echo '<tbody>';
-                                        $query = 'select student_id from student_class_group WHERE class_id = 1 AND group_id = '.$group_id;
+                                        $query = 'select student_id from student_class_group WHERE class_id = '.$class_id.' AND group_id = '.$group_id;
                                         $result = mysqli_query($conn, $query);
                                         $student_id_array = array();
                                         while ($row = mysqli_fetch_assoc($result)) array_push($student_id_array, $row['student_id']);
