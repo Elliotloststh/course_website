@@ -16,6 +16,12 @@ switch ($type){
         $content = $_POST["notice_content"];
         $sql = "insert into website_notice(content,pub_date) VALUES ('$content','$current_date')";
         break;
+    case "message":
+        $table = "message_board";
+        $content = $_POST["content"];
+        $name = $_POST["name"];
+        $sql = "insert into message_board(content,pub_date,name) VALUES ('$content','$current_date','$name')";
+        break;
 
 }
 

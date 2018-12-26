@@ -18,7 +18,7 @@ while($row = mysqli_fetch_assoc($result))
     $intro = $row['introduction'];
 }
 
-if(isset($_POST['phone']) || isset($_POST['mail']) || isset($_POST['intro']))
+if(isset($_POST['phone']) || iss    et($_POST['mail']) || isset($_POST['intro']))
 {
     $phone = ($_POST['phone'] == '') ? $phone : $_POST['phone'];
     @$mail = ($_POST['mail'] == '') ? $mail : $_POST['mail'];

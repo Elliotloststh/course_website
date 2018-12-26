@@ -19,8 +19,8 @@ function admin_insert(info) {
         }
     })
 }
-function admin_delete(arg) {
-    var id = arg.toString();
+function admin_delete(id,type) {
+    // var id = id.toString();
     if(confirm("确认删除吗？") === true){
         $.ajax({
                 type:"post",
@@ -28,8 +28,8 @@ function admin_delete(arg) {
                 async:true,
                 data:
                     {
-                        type:"notice",
-                        id:id
+                        type:type.toString(),
+                        id:id.toString()
                     },
                 dataType:"text",
                 success:function (code) {
@@ -54,10 +54,13 @@ function show_modal(arg) {
     var modal_content;
     switch (type){
         case "notice":
-            modal_content ="内容：<input type='text' id ='notice_content'><br>"
+            modal_content ="内容：<input type='text' id ='notice_content'><br>";
+            $("#add_notice").html(modal_content);
             break;
+        case "message":
+            modal_content ="内容：<input type='text' id ='content'><br>发言人：<input type='text' id ='name'><br>";
+            $("#add_message").html(modal_content);
     }
-    $("#add_notice").html(modal_content);
 
 }
 
@@ -70,6 +73,13 @@ function pack_add(arg) {
             info ={
                 type:"notice",
                 notice_content:$("#notice_content").val()};
+            break;
+        case "message":
+            info={
+                type:"message",
+                content:$("#content").val(),
+                name:$("#name").val()
+            };
             break;
     }
     console.log(info);

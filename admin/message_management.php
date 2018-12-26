@@ -331,7 +331,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <strong><h2>留言管理</h2></strong>
-                    <button type="button" class="btn btn-outline btn-primary text-right"> 添加留言 </button>
+                    <button type="button" class="btn btn-outline btn-primary text-right" data-toggle="modal" data-target="#message_addition" onclick="show_modal('message')"> 添加留言 </button>
 
                 </div>
 
@@ -351,22 +351,21 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>别学了。都5.0了，还学</td>
-                                        <td>foo</td>
-                                        <td>2018.12.8</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>爆肝时请考虑身心健康</td>
-                                        <td>bar</td>
-                                        <td>2018.12.9</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
+                                    <?php include "../common/mysql_connect.php";
+
+                                    $sql = "select * from message_board";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($arr = @mysqli_fetch_row($result)) {
+
+                                        echo "<tr>";
+                                        echo "<td> $arr[1]</td>";
+                                        echo "<td> $arr[3]</td>";
+                                        echo "<td> $arr[2]</td>";
+                                        echo "<td><button class=\"btn btn-danger\" type=\"button\" onclick=\"admin_delete($arr[0],'message')\">删除</button></td>";
+                                        echo "</tr>";
+
+                                    }
+                                    ?>
 
 
                                     </tbody>
@@ -382,8 +381,28 @@
     <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
+
+<!-- modal -->
+<div class="modal fade" id="message_addition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加界面</h4>
+            </div>
+            <div class="modal-body" id="add_message">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary " onclick="pack_add('message')">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
-<!-- /#wrapper -->
+
+
+</body>
+<script src="../js/admin_operation.js"></script>
 
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -401,9 +420,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
-
-</body>
-
 </html>
 
 
