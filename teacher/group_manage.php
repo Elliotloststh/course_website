@@ -19,6 +19,7 @@ require ("sidebar_tea.php");
                                     $result = mysqli_query($conn, $query);
                                     $group_id_array = array();
                                     while($row = mysqli_fetch_assoc($result)) array_push($group_id_array, $row['group_id']);
+                                    sort($group_id_array);
                                     $Collapse_Alphabet = array("One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen","Twenty");
                                     // Collapse_Alphabet is used for the collapsible effect 
                                     for ($i = 0; $i < count($group_id_array); $i++)
@@ -67,6 +68,7 @@ require ("sidebar_tea.php");
                                         $result = mysqli_query($conn, $query);
                                         $student_id_array = array();
                                         while ($row = mysqli_fetch_assoc($result)) array_push($student_id_array, $row['student_id']);
+                                        sort($student_id_array);
                                         for($j=0; $j < count($student_id_array) ; $j++ )
                                         {
                                             $no = $j + 1;

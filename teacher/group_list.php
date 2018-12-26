@@ -59,6 +59,7 @@ require ("sidebar_tea.php");
                                         $query = 'select student_id from student_class_group WHERE class_id = 1 AND group_id = '.$group_id;
                                         $result = mysqli_query($conn, $query);
                                         $student_id_array = array();
+                                        sort($student_id_array);
                                         while ($row = mysqli_fetch_assoc($result)) array_push($student_id_array, $row['student_id']);
                                         for($j=0; $j < count($student_id_array) ; $j++ )
                                         {
