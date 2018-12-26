@@ -22,6 +22,10 @@ switch ($type){
         $table = "link";
         $primaryKey = "id";
         break;
+    case "forum":
+        $table = "post";
+        $primaryKey ="id";
+        break;
 
 }
 
