@@ -331,7 +331,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <strong><h2>账号管理</h2></strong>
-                    <button type="button" class="btn btn-outline btn-primary text-right"> 添加账号 </button>
+                    <button type="button" class="btn btn-outline btn-primary text-right" data-toggle="modal"  data-target="#addition" onclick="show_modal('account')"> 添加账号</button>
 
                 </div>
 
@@ -347,34 +347,30 @@
                                         <th>账号类型</th>
                                         <th>用户名</th>
                                         <th>密码</th>
+                                        <th>名称</th>
+                                        <th>学号</th>
+                                        <th>电话</th>
+                                        <th>邮箱</th>
+                                        <th>介绍</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td >教师</td>
-                                        <td>foo</td>
-                                        <td>123456</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>学生</td>
-                                        <td>bar</td>
-                                        <td>123456</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>管理员</td>
-                                        <td>dummy</td>
-                                        <td>123456</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
+                                    <?php include "../common/mysql_connect.php";
+
+                                    $sql = " select distinct type,usr_name,pswd,name,stu_number,telephone,email,introduction,people.people_id from people LEFT  JOIN people_type_class on people.people_id =people_type_class.people_id";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($arr = @mysqli_fetch_row($result)) {
+
+                                        echo "<tr>";
+                                        for ($i = 0; $i < 8; $i++) {
+                                            echo "<td> $arr[$i]</td>";
+                                        }
+                                        echo "<td><button class=\"btn btn-danger\" type=\"button\" onclick=\"admin_delete($arr[8],'account')\">删除</button></td>";
+                                        echo "</tr>";
+
+                                    }
+                                    ?>
 
                                     </tbody>
                                 </table>
@@ -389,8 +385,27 @@
     <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
+<!-- modal -->
+<div class="modal fade" id="addition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加界面</h4>
+            </div>
+            <div class="modal-body" id="add">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary " onclick="pack_add('account')">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
-<!-- /#wrapper -->
+
+
+</body>
+<script src="../js/admin_operation.js"></script>
 
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -405,11 +420,6 @@
 <script src="../vendor/raphael/raphael.min.js"></script>
 <script src="../vendor/morrisjs/morris.min.js"></script>
 <script src="../data/morris-data.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="../dist/js/sb-admin-2.js"></script>
-
-</body>
 
 </html>
 
