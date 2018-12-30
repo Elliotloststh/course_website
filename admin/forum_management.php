@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: 黄亦非
+ * User: chen
  * Date: 2018/12/8
  * Time: 0:52
  */
@@ -364,6 +364,7 @@
                                     $result = mysqli_query($conn, $sql);
                                     while ($arr = @mysqli_fetch_row($result)) {
 
+                                        $id = $arr[1].'|'.$arr[3];
                                         echo "<tr>";
                                         echo "<td> $arr[1]</td>";
                                         echo "<td> $arr[2]</td>";
@@ -371,7 +372,7 @@
                                         echo "<td> $arr[3]</td>";
                                         echo "<td> $arr[6]</td>";
                                         echo "<td> $arr[5]</td>";
-                                        echo "<td><button class=\"btn btn-danger\" type=\"button\" onclick=\"admin_delete($arr[7],'forum')\">删除</button></td>";
+                                        echo "<td><button class=\"btn btn-danger\" type=\"button\" onclick=\"admin_delete('$id','forum')\">删除</button></td>";
                                         echo "</tr>";
 
                                     }
