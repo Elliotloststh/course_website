@@ -34,7 +34,7 @@ if($_POST) {
       return;
   }
   
-  $query = 'select * from people WHERE people_id = '.$_POST['student_id'];
+  $query = "select * from people WHERE usr_name = '".$_POST['student_id']."'";
   $result = mysqli_query($conn, $query);
   if(@mysqli_num_rows($result) == 0)
   {
@@ -45,7 +45,8 @@ if($_POST) {
       return;
   }
 
-  $query = 'Insert into student_class_group VALUES(1,'.$_POST["student_id"].','.$_GET['group_id'].')';
+  $id = mysqli_fetch_assoc($result)['people_id'];
+  $query = 'Insert into student_class_group VALUES(1,'.$id.','.$_GET['group_id'].')';
   mysqli_query($conn, $query);
   echo '<script>
         setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);

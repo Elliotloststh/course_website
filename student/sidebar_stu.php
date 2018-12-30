@@ -292,9 +292,6 @@
                             <li>
                                 <a href="KeJian_stu.php"> 课件</a>
                             </li>
-                            <li>
-                                <a href="video_stu.php"> 教学视频</a>
-                            </li>
                         </ul>
                     </li>
                     <li>
