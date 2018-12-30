@@ -5,7 +5,7 @@ $course_id = $_SESSION['course_id'];
 $class_id = $_SESSION['class_id'];
 
 if($_POST) {
-  if(empty($_POST['student_id']))
+  if(empty($_POST['stu_number']))
   {
       echo '<script>
               alert("输入不能为空");
@@ -13,8 +13,8 @@ if($_POST) {
             </script>';
       return;
   }
-  // $query = 'Insert into student_class_group VALUES('.$_SESSION['class_id'].','.$_POST['student_id'].','.$_SESSION['group_id'].')';
-  $query = 'select * from student_class_group WHERE class_id = '.$class_id.' AND student_id = '.$_POST['student_id'];
+  // $query = 'Insert into student_class_group 
+  $query = 'select * from student_class_group,people WHERE class_id = '.$_SESSION['class_id'].' AND student_class_group.student_id = people.people_id AND stu_number = '.$_POST['stu_number'];
   $result = mysqli_query($conn, $query);
   if(@mysqli_num_rows($result) == 1){
       echo '<script>
@@ -23,18 +23,8 @@ if($_POST) {
               </script>';
       return;
   }
-
-  $query = "select distinct people_id from people_type_class WHERE people_id = ".$_POST['student_id']." AND type = 'T' ";
-  $result = mysqli_query($conn, $query);
-  if(@mysqli_num_rows($result) == 1){
-      echo '<script>
-              alert("老师不能加入小组");
-              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
-              </script>';
-      return;
-  }
   
-  $query = 'select * from people WHERE people_id = '.$_POST['student_id'];
+  $query = 'select * from people WHERE stu_number = '.$_POST['stu_number'];
   $result = mysqli_query($conn, $query);
   if(@mysqli_num_rows($result) == 0)
   {
@@ -45,7 +35,8 @@ if($_POST) {
       return;
   }
 
-  $query = 'Insert into student_class_group VALUES(1,'.$_POST["student_id"].','.$_GET['group_id'].')';
+  $query = 'Insert into student_class_group (class_id,student_id,group_id) 
+Select '.$_SESSION['class_id'].',people_id,'.$_GET['group_id'].' from people where stu_number = '.$_POST['stu_number'];
   mysqli_query($conn, $query);
   echo '<script>
         setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
@@ -57,11 +48,11 @@ if($_POST) {
 ?>
 
 <form id="form" action="" method="post">
-<input type="hidden" name="student_id" id="student_id" value="">
+<input type="hidden" name="stu_number" id="stu_number" value="">
 </form>
 <script>
   var str=window.prompt('请输入学生学号 :');
-  document.getElementById("student_id").value =str;
+  document.getElementById("stu_number").value =str;
   document.getElementById("form").submit();
 </script>
 
