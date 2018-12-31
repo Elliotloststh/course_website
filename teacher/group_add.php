@@ -13,16 +13,6 @@ if($_POST) {
 	          </script>';
 	    return;
 	}
-  
- $query = "select * from people,people_type_class WHERE people_type_class.people_id = people.people_id AND people_type_class.class_id = ".$_SESSION['class_id']." AND people.stu_number = ".$_POST['stu_number']." AND people_type_class.type = 'T'";
-  $result = mysqli_query($conn, $query);
-  if(@mysqli_num_rows($result) == 1){
-      echo '<script>
-              alert("老师不能加入小组");
-              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
-              </script>';
-      return;
-  }
 
   $query = 'select * from student_class_group WHERE class_id = '.$SESSION['class_id'].' AND group_id = '.$_POST['group_id'];
   $result = mysqli_query($conn, $query);
@@ -34,24 +24,35 @@ if($_POST) {
       return;
   }
 
-  $query = "select distinct people_id from people_type_class WHERE people_id = ".$_POST['stu_number']." AND type = 'T' ";
-  $result = mysqli_query($conn, $query);
-  if(@mysqli_num_rows($result) == 1){
-      echo '<script>
-              alert("老师不能加入小组");
-              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
-              </script>';
-      return;
-  }
-
   $query = 'select * from people WHERE stu_number = '.$_POST['stu_number'];
   $result = mysqli_query($conn, $query);
   if(@mysqli_num_rows($result) == 0)
   {
       echo '<script>
               alert("学号不存在");
-              // setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
+              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
             </script>';
+      return;
+  }
+
+  $query = "select * from people,people_type_class WHERE people_type_class.people_id = people.people_id AND people_type_class.class_id = ".$_SESSION['class_id']." AND people.stu_number = ".$_POST['stu_number'];
+  $result = mysqli_query($conn, $query);
+  if(@mysqli_num_rows($result) == 0)
+  {
+      echo '<script>
+              alert("该学生未选该课程");
+              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
+            </script>';
+      return;
+  }
+
+  $query = "select * from people,people_type_class WHERE people_type_class.people_id = people.people_id AND people_type_class.class_id = ".$_SESSION['class_id']." AND people.stu_number = ".$_POST['stu_number']." AND people_type_class.type = 'T'";
+  $result = mysqli_query($conn, $query);
+  if(@mysqli_num_rows($result) == 1){
+      echo '<script>
+              alert("老师不能加入小组");
+              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
+              </script>';
       return;
   }
   
@@ -75,7 +76,6 @@ Select '.$_SESSION['class_id'].',people_id,'.$_POST['group_id'].' from people wh
   mysqli_close($conn);
   return;
 }
-
 ?>
 
 <form id="form" action="" method="post">

@@ -13,6 +13,28 @@ if($_POST) {
             </script>';
       return;
   }
+  
+  $query = 'select * from people WHERE stu_number = '.$_POST['stu_number'];
+  $result = mysqli_query($conn, $query);
+  if(@mysqli_num_rows($result) == 0)
+  {
+      echo '<script>
+              alert("学号不存在");
+              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
+            </script>';
+      return;
+  }
+
+   $query = "select * from people,people_type_class WHERE people_type_class.people_id = people.people_id AND people_type_class.class_id = ".$_SESSION['class_id']." AND people.stu_number = ".$_POST['stu_number'];
+  $result = mysqli_query($conn, $query);
+  if(@mysqli_num_rows($result) == 0)
+  {
+      echo '<script>
+              alert("该学生未选该课程");
+              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
+            </script>';
+      return;
+  }
 
   $query = "select * from people,people_type_class WHERE people_type_class.people_id = people.people_id AND people_type_class.class_id = ".$_SESSION['class_id']." AND people.stu_number = ".$_POST['stu_number']." AND people_type_class.type = 'T'";
   $result = mysqli_query($conn, $query);
@@ -34,17 +56,6 @@ if($_POST) {
       return;
   }
   
-
-  $query = 'select * from people WHERE stu_number = '.$_POST['stu_number'];
-  $result = mysqli_query($conn, $query);
-  if(@mysqli_num_rows($result) == 0)
-  {
-      echo '<script>
-              alert("学号不存在");
-              setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
-            </script>';
-      return;
-  }
 
   $query = 'Insert into student_class_group (class_id,student_id,group_id) 
 Select '.$_SESSION['class_id'].',people_id,'.$_GET['group_id'].' from people where stu_number = '.$_POST['stu_number'];
