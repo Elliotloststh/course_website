@@ -95,7 +95,7 @@ require ("sidebar_tea.php");
                                     $print = '<td style="Color:'.$color.'">'.$state.'</td>'; echo '<div style="Color:'.$color.'">'.$print.'</div style="Color:'.$color.'">';
                                     $print = '<td>'.$commit_num.'/'.$total_num.'</td>'; echo $print;
                                     $print = '<td>'.$deadline.'</td>'; echo $print;
-                                    $print = '<td><a href="'.$href.''.$homework_id.'">'.$op.'</a></td>'; echo $print;
+                                    $print = '<td><a target="_blank" href="'.$href.''.$homework_id.'">'.$op.'</a></td>'; echo $print;
                                     $print = '<td><a id="ahref'.$homework_id.'" href="javascript:;" onclick="del_confirm('.$homework_id.')">删除</a></td>'; echo $print;
                                     echo '</tr>';
                                     $count++;

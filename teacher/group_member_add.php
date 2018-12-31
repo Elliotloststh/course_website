@@ -46,6 +46,7 @@ if($_POST) {
       return;
   }
 
+
   $query = 'select * from student_class_group,people WHERE class_id = '.$_SESSION['class_id'].' AND student_class_group.student_id = people.people_id AND stu_number = '.$_POST['stu_number'];
   $result = mysqli_query($conn, $query);
   if(@mysqli_num_rows($result) == 1){
@@ -56,9 +57,9 @@ if($_POST) {
       return;
   }
   
-
-  $query = 'Insert into student_class_group (class_id,student_id,group_id) 
+$query = 'Insert into student_class_group (class_id,student_id,group_id) 
 Select '.$_SESSION['class_id'].',people_id,'.$_GET['group_id'].' from people where stu_number = '.$_POST['stu_number'];
+
   mysqli_query($conn, $query);
   echo '<script>
         setTimeout("window.location.href=\'../teacher/group_list.php\'", 0);
