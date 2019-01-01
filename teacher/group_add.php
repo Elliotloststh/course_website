@@ -14,7 +14,7 @@ if($_POST) {
 	    return;
 	}
 
-  $query = 'select * from student_class_group WHERE class_id = '.$SESSION['class_id'].' AND group_id = '.$_POST['group_id'];
+  $query = 'select * from student_class_group WHERE class_id = '.$_SESSION['class_id'].' AND group_id = '.$_POST['group_id'];
   $result = mysqli_query($conn, $query);
   if(@mysqli_num_rows($result) == 1){
       echo '<script>
