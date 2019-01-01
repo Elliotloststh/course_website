@@ -332,7 +332,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <strong><h2>课程管理</h2></strong>
-                    <button type="button" class="btn btn-outline btn-primary text-right"> 添加课程 </button>
+                    <button type="button" class="btn btn-outline btn-primary text-right" data-toggle="modal"  data-target="#addition" onclick="show_modal('curriculum')"> 添加课程 </button>
 
                 </div>
 
@@ -346,36 +346,24 @@
                                     <thead>
                                     <tr>
                                         <th>课程名</th>
-                                        <th>学分</th>
-                                        <th>教师</th>
                                         <th>课程介绍</th>
-                                        <th>学生</th>
-                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td >Computer Network</td>
-                                        <td>5</td>
-                                        <td>Mr. Zheng</td>
-                                        <td>计算机学院大三专业课</td>
-                                        <td><button class="btn btn-link" type="button">45</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>OOP</td>
-                                        <td>2</td>
-                                        <td>Mr. Li</td>
-                                        <td>计算机学院大类课</td>
-                                        <td><button class="btn btn-link" type="button">80</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
+                                    <?php include "../common/mysql_connect.php";
+
+                                    $sql = "select * from course";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($arr = @mysqli_fetch_row($result)) {
+
+                                        echo "<tr>";
+                                        echo "<td> $arr[1]</td>";
+                                        echo "<td> $arr[2]</td>";
+                                        echo "<td><button class=\"btn btn-danger\" type=\"button\" onclick=\"admin_delete($arr[0],'curriculum')\">删除</button></td>";
+                                        echo "</tr>";
+
+                                    }
+                                    ?>
 
                                     </tbody>
                                 </table>
@@ -390,8 +378,28 @@
     <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
+<!-- /#page-wrapper -->
+<!-- modal -->
+<div class="modal fade" id="addition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加界面</h4>
+            </div>
+            <div class="modal-body" id="add">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary " onclick="pack_add('curriculum')">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
-<!-- /#wrapper -->
+
+
+</body>
+<script src="../js/admin_operation.js"></script>
 
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -408,10 +416,6 @@
 <script src="../data/morris-data.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="../dist/js/sb-admin-2.js"></script>
-
-</body>
-
 </html>
 
 

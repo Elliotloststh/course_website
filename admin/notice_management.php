@@ -331,7 +331,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <strong><h2>公告管理</h2></strong>
-                    <button type="button" class="btn btn-outline btn-primary text-right"> 添加公告 </button>
+                    <button type="button" class="btn btn-outline btn-primary text-right" data-toggle="modal" data-target="#notice_addition" onclick="show_modal('notice')"> 添加公告</button>
 
                 </div>
 
@@ -349,22 +349,23 @@
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>下雪了，注意出行安全</td>
-                                        <td>2018.12.8</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>大雪预警，软工需求停课</td>
-                                        <td>2018.12.7</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
+                                    <tbody id="content">
 
+
+                                    <?php include "../common/mysql_connect.php";
+
+                                    $sql = "select * from website_notice";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($arr = @mysqli_fetch_row($result)) {
+
+                                        echo "<tr>";
+                                        echo "<td> $arr[1]</td>";
+                                        echo "<td> $arr[2]</td>";
+                                        echo "<td><button class=\"btn btn-danger\" type=\"button\" onclick='admin_delete($arr[0])'>删除</button></td>";
+                                        echo "</tr>";
+
+                                    }
+                                    ?>
 
                                     </tbody>
                                 </table>
@@ -373,14 +374,37 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
     <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
+
+<!-- modal -->
+<div class="modal fade" id="notice_addition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加界面</h4>
+            </div>
+            <div class="modal-body" id="add_notice">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary " onclick="pack_add('notice')">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
-<!-- /#wrapper -->
+
+
+</body>
+
+<script src="../js/admin_operation.js"></script>
 
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -399,7 +423,6 @@
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
-</body>
 
 </html>
 

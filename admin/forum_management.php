@@ -348,45 +348,34 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th>帖子编号</th>
-                                        <th>发言人</th>
-                                        <th>发言时间</th>
+                                        <th>主题</th>
                                         <th>内容</th>
-                                        <th>回复帖编码</th>
+                                        <th>发言人id</th>
+                                        <th>楼层</th>
+                                        <th>回复楼层</th>
+                                        <th>回复次数</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>foo</td>
-                                        <td>2018.12.1</td>
-                                        <td>Today is Sunday.</td>
-                                        <td>null</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>fool</td>
-                                        <td>2018.12.1</td>
-                                        <td>Today is Monday.</td>
-                                        <td>1</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>foolish</td>
-                                        <td>2018.12.1</td>
-                                        <td>Today is sunny.</td>
-                                        <td>2</td>
-                                        <td>
-                                            <button class="btn btn-danger" type="button">删除</button>
-                                        </td>
-                                    </tr>
+                                    <?php include "../common/mysql_connect.php";
+
+                                    $sql = "select * from post order by post_id DESC";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($arr = @mysqli_fetch_row($result)) {
+
+                                        echo "<tr>";
+                                        echo "<td> $arr[1]</td>";
+                                        echo "<td> $arr[2]</td>";
+                                        echo "<td> $arr[4]</td>";
+                                        echo "<td> $arr[3]</td>";
+                                        echo "<td> $arr[6]</td>";
+                                        echo "<td> $arr[5]</td>";
+                                        echo "<td><button class=\"btn btn-danger\" type=\"button\" onclick=\"admin_delete($arr[7],'forum')\">删除</button></td>";
+                                        echo "</tr>";
+
+                                    }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -400,8 +389,9 @@
     <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
-</div>
-<!-- /#wrapper -->
+
+</body>
+<script src="../js/admin_operation.js"></script>
 
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -419,8 +409,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
-
-</body>
 
 </html>
 

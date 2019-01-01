@@ -1,62 +1,56 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 黄亦非
- * Date: 2018/12/18
- * Time: 19:17
- */
-
-$homework_id = $_GET['homework_id'];
+session_start();
+require_once('../common/mysql_connect.php');
+$homeworkId = $_GET['homework_id'];
+$teacherId = $_SESSION['people_id'];
 require ("sidebar_tea.php");
 ?>
+
+<div id="wrapper">
     <!--    右侧工作区  -->
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-9">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <p>作业1信息</p>
+					<div class="panel-heading">
+                        <p>
+                            学生作业提交信息
+                        </p>
                     </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body" style="height: 300px">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover" >
-                                <thead>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>姓名</th>
-                                    <th>学号</th>
-                                    <th>分数</th>
-                                    <th>作业文件</th>
+                    <div class="panel-body">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+                                    <th>课程作业编号</th>
+                                    <th>作业提交编号</th>
+                                    <th>学生编号</th>
+                                    <th>作业成绩</th>
+                                    <th>作业下载</th>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Huang</td>
-                                    <td>316010xxxx</td>
-                                    <td>99/100</td>
-                                    <td><a href="#">316010xxxx-Huang-作业1</a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Roth</td>
-                                    <td>315010xxxx</td>
-                                    <td>尚未批改</td>
-                                    <td><a href="#">315010xxxx-Roth-作业1</a> </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>schild</td>
-                                    <td>315030xxxx</td>
-                                    <td>尚未批改</td>
-                                    <td><a href="#">315030xxxx-schild-作业1</a> </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+								<?php
+									$sql = "select * from stu_hw, people where homework_id = {$homeworkId} and stu_hw.student_id = people.people_id";
+									$result = mysqli_query($conn,$sql);
+									if(!empty($result)){
+										while($row = mysqli_fetch_assoc($result)){
+											$homeworkName = $row['hw_name'];
+											$url = "../common/download.php?filename={$row['local_address']}";
+											echo '<tr>';
+											echo '<td>'.$homeworkId.'</td>';
+											echo '<td>'.$row['id'].'</td>';
+											echo '<td>'.$row['name'].'</td>';
+											if($row['grade']!=null)
+												echo '<td>'.$row['grade'].'</td>';
+											else
+												echo '<td>'.'未批改'.'</td>';
+											echo '<td>'."<a href= $url>$homeworkName</a>".'</td>';
+											echo '</tr>';
+										
+										}
+									}
+									mysqli_close($conn);
+								?>							
+							</table>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
             </div>
             <div class="col-lg-3">
@@ -66,11 +60,11 @@ require ("sidebar_tea.php");
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body" style="height: 300px">
-                        <form role="form" method="post" action="<?php $_SERVER['PHP_SELF']?>">
-                            <label>学生序号</label>
-                            <input type="number" class="form-control"><br/>
+                        <form role="form" method="post" action="grade_submit.php">
+                            <label>作业编号</label>
+                            <input type="number" name="judgeHomeworkId" class="form-control"><br/>
                             <label>分数</label>
-                            <input type="number" class="form-control"><br/>
+                            <input type="number" name="grade" class="form-control"><br/>
                             <center><button class="btn btn-primary" type="submit">确认打分</button></center>
                         </form>
                     </div>
