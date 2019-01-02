@@ -1,4 +1,5 @@
 <?php
+session_start();
 require ("sidebar_stu.php");
 ?>
     <!--    右侧工作区  -->
@@ -12,9 +13,9 @@ require ("sidebar_stu.php");
                     <div class="panel-body">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#home" data-toggle="tab">课件</a>
+                            <li class="active"><a href="#home" data-toggle="tab">课程资料</a>
                             </li>
-                            <li><a href="#profile" data-toggle="tab">课程资料</a>
+                            <li><a href="#profile" data-toggle="tab">视频资料</a>
                             </li>
                         </ul>
 
@@ -25,31 +26,31 @@ require ("sidebar_stu.php");
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th>章节</th>
                                             <th>标题</th>
                                             <th>类型</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>A pictrue is worth 1000 words</td>
-                                            <td>PPT</td>
-                                            <td><button class="btn btn-link" type="button">下载</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>UML foundmental 1</td>
-                                            <td>PPT</td>
-                                            <td><button class="btn btn-link" type="button">下载</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>UML foundmental 2</td>
-                                            <td>PPT</td>
-                                            <td><button class="btn btn-link" type="button">下载</button></td>
-                                        </tr>
+                                        <?php
+                                        require_once('../common/mysql_connect.php');
+                                        $query = 'select * from material WHERE material_type != "mp4" and class_id = '.$_SESSION['class_id'];
+                                        $result = mysqli_query($conn, $query);
+                                        while ($row = mysqli_fetch_assoc($result))
+                                        {
+                                            echo '<tr>';
+                                            echo "<td>".$row['material_name']."</td>";
+                                            echo "<td>".$row['material_type']."</td>";
+                                            $add = $row['local_address'];
+                                            echo "<td>
+                                                        <form action=\"../common/download_material.php\" method=\"get\">
+                                                        <input type='hidden' name=\"address\" value = '$add'>
+                                                        <input type=\"submit\" value=\"下载\">
+                                                        </form>
+                                                  </td>";
+                                            echo '</tr>';
+                                        }
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -57,34 +58,31 @@ require ("sidebar_stu.php");
                             </div>
                             <div class="tab-pane fade" id="profile">
                                 <div class="table-responsive">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th>序号</th>
                                             <th>标题</th>
-                                            <th>文件</th>
+                                            <th>类型</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>实验报告模板</td>
-                                            <td>浙江大学实验报告模板格式.doc</td>
-                                            <td><button class="btn btn-link" type="button">下载</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>MagicDraw</td>
-                                            <td>MagicDraw Crack.zip</td>
-                                            <td><button class="btn btn-link" type="button">下载</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>软件需求规格说明书模板</td>
-                                            <td>[G03]软件需求规格说明书.pdf</td>
-                                            <td><button class="btn btn-link" type="button">下载</button></td>
-                                        </tr>
+                                        <?php
+                                        require_once('../common/mysql_connect.php');
+                                        $query = 'select * from material WHERE material_type = "mp4" and class_id = '.$_SESSION['class_id'];
+                                        $result = mysqli_query($conn, $query);
+                                        while ($row = mysqli_fetch_assoc($result))
+                                        {
+                                            echo '<tr>';
+                                            $filename = $row['material_name'];
+                                            $add = $row['local_address'];
+                                            echo "<td>".$filename."</td>";
+                                            echo "<td>".$row['material_type']."</td>";
+                                            echo "<td><a target='_blank' href='../common/watch_video.php?addr=".$row['local_address']."'>观看视频</a> </td>";
+                                            echo '</tr>';
+                                        }
+                                        mysqli_close($conn);
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
