@@ -21,6 +21,7 @@ function admin_insert(info) {
 }
 function admin_delete(id,type) {
     // var id = id.toString();
+    console.log(id.toString());
     if(confirm("确认删除吗？") === true){
         $.ajax({
                 type:"post",
