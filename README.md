@@ -2,13 +2,6 @@
 
 
 ### 数据库配置(使用云数据库共享)
-+ 'DB_USER', 'course_web'
-
-+ 'DB_PASSWORD', '123456'
-
-+ 'DB_HOST', '39.108.218.249'
-
-+ 'DB_NAME', 'course_website'
 
 
 ### 待完成项
