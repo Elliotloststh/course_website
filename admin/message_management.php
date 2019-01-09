@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: 黄亦非
+ * User: chen
  * Date: 2018/12/8
  * Time: 0:52
  */
@@ -353,7 +353,7 @@
                                     <tbody>
                                     <?php include "../common/mysql_connect.php";
 
-                                    $sql = "select * from link";
+                                    $sql = "select * from message_board";
                                     $result = mysqli_query($conn, $sql);
                                     while ($arr = @mysqli_fetch_row($result)) {
 
